@@ -1,0 +1,83 @@
+<div class="row">
+
+  <div class="col-md-4">
+    <h3><strong>My DreamBall team</strong></h3>
+    <br>
+    <ul>
+      {{#each dreamballs}}
+        {{#unless ownerID}} 
+          <li>
+              <h4>{{id}}. {{charName}}</h4>
+          
+              <button class="change-dev red"     
+              data-id="{{id}}" data-newdev=1>
+                  CONGRATS!
+              </button>
+
+          </li>
+        {{/unless}}
+      {{/each}}              
+    </ul>
+  </div>
+
+  <div class="col-md-4 style="text-align:center">
+    <h3><strong>Add a DreamBall Athlete</strong></h3>
+    <br>
+
+    <form class="create-form">
+      <div class="form-group">
+        <label for="bu"><h4>DreamBall Name:</h4></label>
+        <input type="text" id="bu" name="charName">
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <!--
+            <label for="ownerID">Devoured?</label><br>
+            -->
+            <input type="radio" name="ownerID" value="0"><h4>I want to enter this player</h4>
+            <input type="radio" name="ownerID" value="1" checked><h6>I had this one in the past and didn't like it.</h6>
+          </div>
+        </div>             
+
+        <div class="col-md-6">
+          <br>
+          <button class="red" type="Submit">ADD PLAYER</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
+
+  <div class="col-md-4">
+    <h3><strong>List of available players</strong></h3>
+    <br>
+    <ul>
+      {{#each dreamballs}}
+        {{#if ownerID}}   
+          <li>
+            <h4>{{id}}. {{charName}}</h4>
+
+            
+            <button class="change-dev red" 
+            dev=1
+            data-id="{{id}}" data-newdev=0>
+              DRAFT ME!
+            </button>
+            
+            <button class="delete-dreamball red" data-id="{{this.id}}">DELETE!</button>
+          </li>      
+        {{/if}}
+      {{/each}}  
+    </ul>
+
+  </div>
+</div>
+
+
+
+
+
