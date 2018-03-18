@@ -8,6 +8,11 @@ var db = require("../models");
 
 // GET route for getting all of the dreamballs
 
+
+
+
+///////////////////////////////////////   
+
 router.get("/", function(req, res) {
   // findAll returns all entries for a table when used with no options
   db.DreamBall.findAll({}).then(function(dbDreamBall) {
@@ -68,7 +73,40 @@ router.delete("/api/dreamballs/:id", function(req, res) {
     res.json(dbDreamBall);
   });
       
-});  
+}); 
+/////////////////////////////
+
+router.get("/", function(req, res) {
+  // findAll returns all entries for a table when used with no options
+  db.UserID.findAll({}).then(function(dbUserID) {
+    var userids = [];
+
+    dbUserID.map(function(userid) {
+      userids.push(userid.dataValues);
+    });
+
+    // We have access to the burgers as an argument inside of the callback function
+    res.render('index', { userids: userids });
+  });  
+
+});
+
+// POST route for saving a new userid. We can create a dreamball using the data on req.body
+router.post("/api/userids", function(req, res) {
+  console.log(req.body);
+    // create takes an argument of an object describing the item we want to
+    // insert into our table. In this case we just we pass in an object with a text
+    // and complete property (req.body)
+    db.UserID.create({
+      userName: req.body.userName,
+      teamName: req.body.teamName,
+      passWord: req.body.passWord
+    }).then(function(dbUserID) {
+      // We have access to the new userid as an argument inside of the callback function
+      res.json(dbUserID);
+    });
+
+}); 
 
 
 // Export routes for server.js to use.
